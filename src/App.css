@@ -3,7 +3,7 @@
 .main-header{
   text-align: center;
   height: 120px;
-  margin: 60px 0px 0px 0px;
+  margin: 60px 0 0 0;
 }
 *{
 
@@ -13,7 +13,6 @@
 
 }
 .main-general{
-  background: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,14 +29,14 @@
 .total-death-header{
   color: white;
   background-color: rgb(39, 165, 207);
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0 0;
   height: 4vw;
   font-size: 3vw;
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: center;
-  padding: 20px 0px 0px 0px;
+  padding: 20px 0 0 0;
 
 }
 .total-death-info{
@@ -51,23 +50,20 @@
   color: white;
 }
 footer{
-  height: 40%;
-  display: flex;
-  align-items: flex-end;
   margin: 20px;
   justify-content: center;
 }
 i{
   font-size: 1.5rem;
-  margin: 0px 0px 0px 10px;
+  margin: 0 0 0 10px;
 
 }
 a{
   text-decoration: none;
 }
 body{
-  height: 100vh;
-  background: linear-gradient(15deg, #3277b1 0%, #80d0c7 100%);
+  background: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+
 
 }
 .main-chart{
@@ -82,12 +78,11 @@ body{
 
 }
 .place-holder{
-  margin: 30px 0px 30px 0px;
+  margin: 30px 0 30px 0;
 }
 .navbar{
-  background: radial-gradient(circle at 10% 20%, rgb(221, 49, 49) 0%, rgb(119, 0, 0) 90%);
   width: 100%;
-  height: 6rem;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -97,7 +92,7 @@ body{
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0px 60px 0px 0px;
+  margin: 0 60px 0 0;
 }
 .nav_element{
   list-style: none;
@@ -124,7 +119,7 @@ body{
 }
 .world-cases-header{
   text-align: center;
-  margin: 30px 0 0px 0;
+  margin: 30px 0 0 0;
   font-size: 3.5rem;
   color: lightsalmon;
 }
@@ -133,7 +128,7 @@ body{
   gap: 20px;
   padding: 20px;
   align-items: center;
-  margin: 10px 0px 0px 0;
+  margin: 10px 0 0 0;
   box-shadow: 10px 5px 10px darkred;
   font-size: 1.1rem;
   background: linear-gradient(15deg, #3277b1 0%, #80d0c7 100%);
@@ -146,7 +141,7 @@ li{
   color: lightsalmon;
   gap: 35px;
   align-items: center;
-  margin: 0px 0px 0px 50px;
+  margin: 0 0 0 50px;
   font-size: 1.3rem;
   padding: 20px;
 }
@@ -221,9 +216,8 @@ li{
   color: lightcoral;
 }
 .general-country-container{
-  background-color: grey;
   color: black;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,8 +228,15 @@ li{
 }
 .country-container{
   background-color: lightyellow;
-  width: 40%;
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70vw;
+  height: 60vh;
+  flex-direction: column;
+}
+.data-container{
+  display: flex;
 }
 .general-country{
   font-size: 1.4rem;

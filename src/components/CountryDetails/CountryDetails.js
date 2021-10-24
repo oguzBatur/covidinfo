@@ -4,38 +4,45 @@ const CountryDetails = ({countryName, totalCases, totalDeaths, newCases, newDeat
     console.log(countryName)
     return(
         <div className='general-country-container'>
-               <h1 className='general-country-header'>{countryName}</h1>
            <div className='country-container'>
-               <p className='general-country first'>
-                   <p>Total Cases</p>
-                   {totalCases}</p>
-               <p className='general-country second'>
-                   <p>New Cases</p>
-                   {newCases}</p>
-               <p className='general-country third'>
-                   <p>Total Deaths</p>
-                   {totalDeaths}</p>
-               <p className='general-country fourth'>
-                   <p>New Deaths</p>
-                   {newDeaths}</p>
-               <p className='general-country fifth'>
-                   <p>Total Recovered</p>
-                   {totalRecovered}</p>
-               <p className='general-country sixth'>
-                   <p>New Recovered</p>
-                   {newRecovered}</p>
-               <p className='general-country seventh'>
-                   <p>Active Cases</p>
-                   {activeCases}</p>
-               <p className='general-country eighth'>
-                   <p>Serious Cases</p>
-                   {seriousCases}</p>
-               <p className='general-country ninth'>
-                   <p>Total Tests</p>
-                   {totalTests}</p>
-               <p className='general-country tenth'>
-                   <p>Population</p>
-                   {population}</p>
+               <h1 className='general-country-header'>{countryName}</h1>
+               <div className="data-container">
+                   <div className="first-row">
+                       <p className='general-country first'>
+                           <p>Total Cases</p>
+                           {totalCases}</p>
+                       <p className='general-country second'>
+                           <p>New Cases</p>
+                           {newCases}</p>
+                       <p className='general-country third'>
+                           <p>Total Deaths</p>
+                           {totalDeaths}</p>
+                       <p className='general-country fourth'>
+                           <p>New Deaths</p>
+                           {newDeaths}</p>
+                       <p className='general-country fifth'>
+                           <p>Total Recovered</p>
+                           {totalRecovered}</p>
+                   </div>
+                   <div className="second-row">
+                       <p className='general-country sixth'>
+                           <p>New Recovered</p>
+                           {newRecovered}</p>
+                       <p className='general-country seventh'>
+                           <p>Active Cases</p>
+                           {activeCases}</p>
+                       <p className='general-country eighth'>
+                           <p>Serious Cases</p>
+                           {seriousCases}</p>
+                       <p className='general-country ninth'>
+                           <p>Total Tests</p>
+                           {totalTests}</p>
+                       <p className='general-country tenth'>
+                           <p>Population</p>
+                           {population}</p>
+                   </div>
+               </div>
+
            </div>
         </div>
     )

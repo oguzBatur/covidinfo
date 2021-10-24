@@ -39,7 +39,6 @@ class  App extends React.Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({latestTotals: data.totalCases});
-            
         })
         .catch(err => {
             console.log("There was an problem with connection.");
