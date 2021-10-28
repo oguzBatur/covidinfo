@@ -1,29 +1,22 @@
 import React from "react";
 import {motion} from "framer-motion";
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 class Country extends React.Component{
         render() {
             return(
-                <div className='element-container' >
-                        <motion.h3  initial={{opacity: 0}} transition={{duration: '0.5', type:'tween'}}  animate={{opacity: 1}} className='elements element1'>{this.props.countryName}</motion.h3>
-                        <p className='elements element2'>{this.props.totalCases}</p>
-                        <p className='elements element3'>{this.props.newCases}</p>
-                        <p className='elements element4'>{this.props.totalDeaths}</p>
-                        {/*<p className='elements element5'>{this.props.newDeaths}</p>*/}
-                        {/*<p className='elements element6'>{this.props.totalRecovered}</p>*/}
-                        {/*<p className='elements element7'>{this.props.newRecovered}</p>*/}
-                        {/*<p className='elements element8'>{this.props.activeCases}</p>*/}
-                        {/*<p className='elements element9'>{this.props.seriousCases}</p>*/}
-                        {/*<p className='elements element10'>{this.props.totalTests}</p>*/}
-
+                <motion.div  initial={{y: -100, opacity:0}} animate={{y: 0, opacity:1}}  key={this.props.countryName} className='element-container' >
+                        <h3 className='elements element1'>{this.props.countryName}</h3>
+                        <p className='elements element2'>Total Cases <br/> <p>{this.props.totalCases}</p></p>
+                        <p className='elements element4'>Total Deaths <br/> <p>{this.props.totalDeaths}</p></p>
+                        <p className='elements element6'>Total Recovered <br/> <p>{this.props.totalRecovered}</p></p>
                         <Link to={`/countries/${this.props.countryName.toLowerCase()}`}>
-                            <button>Details</button>
+                            <button className='details'>Details</button>
                         </Link>
-                </div>
+                </motion.div>
             )
         }
 
 
 }
 
-export default Country;
+export default withRouter(Country);

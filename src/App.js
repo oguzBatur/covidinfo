@@ -18,7 +18,9 @@ class  App extends React.Component {
         isFetching: true,
         motionStart: -180,
         motionFinish: 0,
-        currentCountry: ''
+        currentCountry: '',
+        total_recovered: '',
+        total_tests: ''
 
     }
   }
@@ -26,6 +28,11 @@ class  App extends React.Component {
     componentDidMount = () => {
         this.fetchData();
         setInterval(this.fetchData, 900000);
+        console.log('Home has been mounted!');
+    }
+
+    componentWillUnmount() {
+      console.log('Home has been unmounted!')
     }
 
     selectedCountry = (selected) =>{
@@ -46,7 +53,7 @@ class  App extends React.Component {
         fetch('http://localhost:3001/countries')
             .then(res => res.json())
             .then(data => {
-                this.setState({all_countries: data, total_deaths: data[7].totalDeaths, isFetching: false})
+                this.setState({all_countries: data, total_deaths: data[7].totalDeaths, total_tests:data[7].totalTests ,total_recovered: data[7].totalRecovered, isFetching: false})
         })
         .catch(err => {
             console.log('There was an problem with the connection to the server!');
@@ -56,28 +63,57 @@ class  App extends React.Component {
   render()
   {
     const totalData = () => {
+        const dailyDate = new Date();
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
         if (!this.state.isFetching){
             return(
                 <div>
                     
                     <div className='main-general'>
                         <div className='background'/>
-                        <motion.h1 initial={{opacity: 0}} transition={{duration: '0.5', type:'tween'}}  animate={{fontSize: '50px', opacity: 1}} className='main-header'>
-                            Welcome to Covid Tracker
-                        </motion.h1>
-                        <h1 className='place-holder'/>
-                        <motion.div initial={{opacity: 0, y: '20px'}} animate={{opacity: 1, y: '0px'}} transition={{delay: '0.25', duration:'1'}} className='total-death-div'>
-                            <h2 className='total-death-header'>Total Cases Worldwide </h2>
-                            <motion.p  initial={{opacity: 0, y: '20px'}} animate={{opacity: 1, y: '0px'}} transition={{delay: '1', duration:'1'}} className='total-death-info'>{this.state.latestTotals}</motion.p>
+                        <h1  className='main-header'>
+                            WELCOME TO COVID TRACKER
+                        </h1>
+                        <h2 className='og-header'>
+                            WORLD CORONAVIRUS TABLE
+                        </h2>
+                        <motion.div initial={{opacity: 0, scale: 0.8, y: -100}} animate={{opacity: 1, scale: 1, y: 0}} className='info-holder'>
+                            <div className="firstrow">
+                                <div className="total-test-div info-div">
+                                    <h2 className="total-test-header info-h">Total Tests Worldwide</h2>
+                                    <p className="total-test-info info-p">{this.state.total_tests | 0}</p>
+                                </div>
+                                <div className='total-cases-div info-div'>
+                                    <h2 className='total-cases-header info-h'>Total Cases Worldwide </h2>
+                                    <p className='total-cases-info info-p'>{this.state.latestTotals}</p>
+                                </div>
+                            </div>
+                            <div className='date-container'>
+                                <h3 className='date'>{dailyDate.getDate().toString()}</h3>
+                                <h3 className='dateMonth'>{monthNames[dailyDate.getMonth()].toUpperCase()}</h3>
+                                <h3 className='year'>{dailyDate.getFullYear().toString()}</h3>
+                            </div>
+                            <div className="secondrow">
+                                <div className="total-recovered-div info-div">
+                                    <h2 className="total-recovered-header info-h">Total Recovered Worldwide</h2>
+                                    <p className="total-recovered-info info-p">{this.state.total_recovered}</p>
+                                </div>
+                                <div className='total-death-div info-div'>
+                                    <h2 className='total-death-header info-h'>Total Deaths Worldwide </h2>
+                                    <p  className='total-death-info info-p'>{this.state.total_deaths}</p>
+                                </div>
+                            </div>
                         </motion.div>
-                        <motion.div initial={{opacity: 0, y: '20px'}} animate={{opacity: 1, y: '0px'}} transition={{delay: '1', duration:'1'}} className='total-death-div'>
-                            <h2 className='total-death-header'>Total Deaths Worldwide </h2>
-                            <motion.p  initial={{opacity: 0, y: '20px'}} animate={{opacity: 1, y: '0px'}} transition={{delay: '1', duration:'1'}} className='total-death-info'>{this.state.total_deaths}</motion.p>
-                        </motion.div>
-                        <footer>Made by Oğuz Batur Sarıöz
-                            <i className="fab fa-github"/>
+                        <footer>
+                            <div>
+                                Made by Oğuz Batur Sarıöz
+                                <i className="fab fa-github"/>
+                            </div>
                         </footer>
                     </div>
+
                 </div>
             )
         }
@@ -89,13 +125,12 @@ class  App extends React.Component {
             )
         }
     }
-      console.log(4);
 
       return (
 
       <div className="App">
           <Router>
-            <Navbar/>
+            <Navbar countryData={this.state.all_countries} />
             <Switch>
                 <Route exact path='/' component={totalData}/>
                 <Route path='/about' component={About}/>

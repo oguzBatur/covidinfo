@@ -1,93 +1,96 @@
-import React, {useState} from "react";
+import React from "react";
 import {AnimatePresence, motion} from "framer-motion";
 import Country from "../Country/Country";
-import {Switch, BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
+import {Switch, Route, withRouter} from 'react-router-dom';
 import CountryDetails from "../CountryDetails/CountryDetails";
-const Countries = (props) => {
 
-        const [twenty, setTwenty] = useState(20);
+class Countries extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            twenty: 20
+        }
+    }
+    componentDidMount() {
+        this.setState({twenty: 20})
+        console.log('Countries has been mounted!')
+    }
+
+    componentWillUnmount() {
+        this.setState({twenty: 20})
+        console.log('Countries has been unmounted!')
+
+    }
+
+    render(){
+
         const allCountries = () => {
-            return Object.keys(props.countryData).map((country) => {
+            return Object.keys(this.props.countryData).map((country) => {
                 if (Number(country) !== 0 && Number(country) !== 1 && Number(country) !== 2 && Number(country) !== 3 && Number(country) !== 4 && Number(country) !== 5 && Number(country) !== 6 && Number(country) !== 7) {
-                    return <Country key={country} countryName={props.countryData[country].country}
-                                    totalCases={props.countryData[country].totalCases}
-                                    newCases={props.countryData[country].newCases}
-                                    totalDeaths={props.countryData[country].totalDeaths}/>
+                    return <Country key={country} countryName={this.props.countryData[country].country}
+                                    totalCases={this.props.countryData[country].totalCases}
+                                    totalRecovered={this.props.countryData[country].totalRecovered}
+                                    totalDeaths={this.props.countryData[country].totalDeaths}/>
                 }
             });
         }
-    const countryDetails = () => {
+        const countryDetails = () => {
 
-            return Object.keys(props.countryData).map((country) => {
-            if (Number(country) !== 0 && Number(country) !== 1 && Number(country) !== 2 && Number(country) !== 3 && Number(country) !== 4 && Number(country) !== 5 && Number(country) !== 6 && Number(country) !== 7) {
-                return <Route path={`/countries/${props.countryData[country].country.toLowerCase()}`} render={(no) => <CountryDetails totalDeaths={props.countryData[country].totalDeaths} totalCases={props.countryData[country].totalCases} countryName={props.countryData[country].country} newCases={props.countryData[country].newCases} newDeaths={props.countryData[country].newDeaths} totalRecovered={props.countryData[country].totalRecovered} newRecovered={props.countryData[country].newRecovered} activeCases={props.countryData[country].activeCases} seriousCases={props.countryData[country].seriousCases} totalTests={props.countryData[country].totalTests} population={props.countryData[country].population}/>}/>
-            }
-        });
-    }
+            return Object.keys(this.props.countryData).map((country) => {
+                if (Number(country) !== 0 && Number(country) !== 1 && Number(country) !== 2 && Number(country) !== 3 && Number(country) !== 4 && Number(country) !== 5 && Number(country) !== 6 && Number(country) !== 7) {
+                    return <Route path={`/countries/${this.props.countryData[country].country.toLowerCase()}`} render={(no) => <CountryDetails key={this.props.countryData[country].country} totalDeaths={this.props.countryData[country].totalDeaths} totalCases={this.props.countryData[country].totalCases} countryName={this.props.countryData[country].country} newCases={this.props.countryData[country].newCases} newDeaths={this.props.countryData[country].newDeaths} totalRecovered={this.props.countryData[country].totalRecovered} newRecovered={this.props.countryData[country].newRecovered} activeCases={this.props.countryData[country].activeCases} seriousCases={this.props.countryData[country].seriousCases} totalTests={this.props.countryData[country].totalTests} population={this.props.countryData[country].population}/>}/>
+                }
+            });
+        }
+        const limited = allCountries().slice(0, this.state.twenty);
 
-        const limited = allCountries().slice(0, twenty);
         const limitChecker = () =>{
-
-            if(twenty <= allCountries().length)
+            if(this.state.twenty <= allCountries().length)
             {
                 return (
-                    <div className='load-controller'>
+                    <div  className='load-controller'>
                         {limited}
                         <p onClick={() => {
-                            setTwenty(twenty + 20);
-                            console.log(twenty);
+                            this.setState({twenty: this.state.twenty + 20})
+                            console.log(this.state.twenty);
                         }}
-                        className='load-more'>Load More...</p>
+                           className='load-more'>Load More...</p>
                     </div>
                 )
             }else{
                 return (
-                    <div>
+                    <motion.div >
                         {limited}
                         <p className='load-note'>All countries have been displayed.</p>
-                    </div>
+                    </motion.div>
                 )
             }
         }
         const countryList = () => {
+
             return(
                 <AnimatePresence exitBeforeEnter>
                     {shouldAnimate && (
-
                         <motion.h2
                             key='loader'
                             initial={{opacity: 0}}
-                            transition={{repeat: !!shouldAnimate}}
                             animate={{opacity: 1}}
                             exit={{opacity: 0, repeat: 0}}
                             className='loader'
                         >
                             Loading...</motion.h2>
                     )}
-                    {props.countryData && (
+                    {this.props.countryData && (
 
                         <motion.div key='information' initial={{opacity: 0}} animate={{opacity:1}} className='world-cases-general'>
-                            <h1 className='world-cases-header'>World Wide Cases</h1>
-                            <ul className='world-cases-info'>
-                                <li>Country</li>
-                                <li>Total Cases</li>
-                                <li>New Cases</li>
-                                <li>Total Deaths</li>
-                                <li>New Deaths</li>
-                                <li>Total Recovered</li>
-                                <li>New Recovered</li>
-                                <li>Active Cases</li>
-                                <li>Serious Cases</li>
-                                <li>Total Tests</li>
-                                <li>Population</li>
-                            </ul>
+                            <h1 className='world-cases-header'>Covid World Wide</h1>
                             {limitChecker()}
                         </motion.div>
                     )}
                 </AnimatePresence>
             )
         }
-     const shouldAnimate = !props.countryData;
+        const shouldAnimate = !this.props.countryData;
         return(
 
             <div>
@@ -98,10 +101,7 @@ const Countries = (props) => {
             </div>
         )
 
-
-
-
-
+    }
 
 
 }
