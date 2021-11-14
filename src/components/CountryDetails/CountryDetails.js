@@ -7,7 +7,7 @@ const CountryDetails = ({countryName, totalCases, totalDeaths, newCases, newDeat
         "July", "August", "September", "October", "November", "December"
     ];
     return(
-        <motion.div initial={{opacity: 0, y: -100, scale: .6}} animate={{opacity: 1, y: 0, scale: .8}} className='general-country-container'>
+        <motion.div initial={{opacity: 0, y: -100, scale: .6}}  animate={{opacity: 1, y: 0, scale: .8}} className='general-country-container'>
            <div className='country-container'>
                <h1 className='general-country-header'>{countryName.toUpperCase()} DAILY  CORONAVIRUS TABLE</h1>
                <div className="data-container">

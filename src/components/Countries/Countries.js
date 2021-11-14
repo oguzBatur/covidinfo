@@ -26,7 +26,7 @@ class Countries extends React.Component{
 
         const allCountries = () => {
             return Object.keys(this.props.countryData).map((country) => {
-                if (Number(country) !== 0 && Number(country) !== 1 && Number(country) !== 2 && Number(country) !== 3 && Number(country) !== 4 && Number(country) !== 5 && Number(country) !== 6 && Number(country) !== 7) {
+                if (Number(country) > 7) {
                     return <Country key={country} countryName={this.props.countryData[country].country}
                                     totalCases={this.props.countryData[country].totalCases}
                                     totalRecovered={this.props.countryData[country].totalRecovered}
@@ -37,7 +37,7 @@ class Countries extends React.Component{
         const countryDetails = () => {
 
             return Object.keys(this.props.countryData).map((country) => {
-                if (Number(country) !== 0 && Number(country) !== 1 && Number(country) !== 2 && Number(country) !== 3 && Number(country) !== 4 && Number(country) !== 5 && Number(country) !== 6 && Number(country) !== 7) {
+                if (Number(country) > 7){
                     return <Route path={`/countries/${this.props.countryData[country].country.toLowerCase()}`} render={(no) => <CountryDetails key={this.props.countryData[country].country} totalDeaths={this.props.countryData[country].totalDeaths} totalCases={this.props.countryData[country].totalCases} countryName={this.props.countryData[country].country} newCases={this.props.countryData[country].newCases} newDeaths={this.props.countryData[country].newDeaths} totalRecovered={this.props.countryData[country].totalRecovered} newRecovered={this.props.countryData[country].newRecovered} activeCases={this.props.countryData[country].activeCases} seriousCases={this.props.countryData[country].seriousCases} totalTests={this.props.countryData[country].totalTests} population={this.props.countryData[country].population}/>}/>
                 }
             });
@@ -70,12 +70,12 @@ class Countries extends React.Component{
 
             return(
                 <AnimatePresence exitBeforeEnter>
-                    {shouldAnimate && (
+                    {!this.props.countryData && (
                         <motion.h2
                             key='loader'
-                            initial={{opacity: 0}}
-                            animate={{opacity: 1}}
-                            exit={{opacity: 0, repeat: 0}}
+                            initial={{opacity: 0, y: -100, scale: .7}}
+                            animate={{opacity: 1, y: 0, scale: 1}}
+                            exit={{opacity: 0, y:100, scale: .6}}
                             className='loader'
                         >
                             Loading...</motion.h2>
@@ -90,15 +90,12 @@ class Countries extends React.Component{
                 </AnimatePresence>
             )
         }
-        const shouldAnimate = !this.props.countryData;
         return(
 
-            <div>
                 <Switch>
-                    {countryDetails()}
-                    <Route component={countryList}/>
+                    {countryDetails()}   {/* Routelar! */} 
+                    <Route component={countryList}/> {/* Ülke Listemiz. */}
                 </Switch>
-            </div>
         )
 
     }

@@ -5,7 +5,7 @@ import Countries from "./components/Countries/Countries";
 import Navbar from "./components/Navbar/Navbar";
 import About from './components/About/About';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-
+import Socials from "./components/Socials/Socials";
 
 class  App extends React.Component {
   constructor()
@@ -82,11 +82,11 @@ class  App extends React.Component {
                         <motion.div initial={{opacity: 0, scale: 0.8, y: -100}} animate={{opacity: 1, scale: 1, y: 0}} className='info-holder'>
                             <div className="firstrow">
                                 <div className="total-test-div info-div">
-                                    <h2 className="total-test-header info-h">Total Tests Worldwide</h2>
+                                    <h2 className="total-test-header info-h">Total Tests</h2>
                                     <p className="total-test-info info-p">{this.state.total_tests | 0}</p>
                                 </div>
                                 <div className='total-cases-div info-div'>
-                                    <h2 className='total-cases-header info-h'>Total Cases Worldwide </h2>
+                                    <h2 className='total-cases-header info-h'>Total Cases</h2>
                                     <p className='total-cases-info info-p'>{this.state.latestTotals}</p>
                                 </div>
                             </div>
@@ -97,11 +97,11 @@ class  App extends React.Component {
                             </div>
                             <div className="secondrow">
                                 <div className="total-recovered-div info-div">
-                                    <h2 className="total-recovered-header info-h">Total Recovered Worldwide</h2>
+                                    <h2 className="total-recovered-header info-h">Total Recovered</h2>
                                     <p className="total-recovered-info info-p">{this.state.total_recovered}</p>
                                 </div>
                                 <div className='total-death-div info-div'>
-                                    <h2 className='total-death-header info-h'>Total Deaths Worldwide </h2>
+                                    <h2 className='total-death-header info-h'>Total Deaths </h2>
                                     <p  className='total-death-info info-p'>{this.state.total_deaths}</p>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ class  App extends React.Component {
                         <footer>
                             <div>
                                 Made by Oğuz Batur Sarıöz
-                                <i className="fab fa-github"/>
+                                <a target='_blank' href="https://github.com/oguzBatur"><i className="fab fa-github"/></a>
                             </div>
                         </footer>
                     </div>
@@ -134,7 +134,8 @@ class  App extends React.Component {
             <Switch>
                 <Route exact path='/' component={totalData}/>
                 <Route path='/about' component={About}/>
-                <Route path='/countries'  render={(props) => <Countries selectedCountry={this.selectedCountry} countryData={this.state.all_countries}/>}/>
+                <Route path='/countries'  render={() => <Countries selectedCountry={this.selectedCountry} countryData={this.state.all_countries}/>}/>
+                <Route path='/socials' component={Socials}/>
             </Switch>
           </Router>
 
